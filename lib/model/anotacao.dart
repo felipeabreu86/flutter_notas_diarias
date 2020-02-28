@@ -6,8 +6,14 @@ class Anotacao {
   String descricao;
   String data;
 
-  Anotacao({
+  Anotacao.id({
     this.id,
+    this.titulo,
+    this.descricao,
+    this.data,
+  });
+
+  Anotacao({
     this.titulo,
     this.descricao,
     this.data,
@@ -19,7 +25,7 @@ class Anotacao {
     String descricao,
     String data,
   }) {
-    return Anotacao(
+    return Anotacao.id(
       id: id ?? this.id,
       titulo: titulo ?? this.titulo,
       descricao: descricao ?? this.descricao,
@@ -42,7 +48,7 @@ class Anotacao {
   static Anotacao fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Anotacao(
+    return Anotacao.id(
       id: map['id'],
       titulo: map['titulo'],
       descricao: map['descricao'],

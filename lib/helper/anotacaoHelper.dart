@@ -1,3 +1,4 @@
+import 'package:flutter_notas_diarias/model/anotacao.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -20,8 +21,11 @@ class AnotacaoHelper {
   }
 
   _onCreate(Database db, int version) async {
-    String sql =
-        "CREATE TABLE anotacao (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, descricao TEXT, data DATETIME)";
+    String sql = "CREATE TABLE $nomeTabela ("
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        "titulo VARCHAR, "
+        "descricao TEXT, "
+        "data DATETIME)";
     await db.execute(sql);
   }
 
