@@ -38,9 +38,22 @@ class AnotacaoHelper {
     return db;
   }
 
-    Future<int> salvarAnotacao(Anotacao anotacao) async {
+  Future<int> salvarAnotacao(Anotacao anotacao) async {
     var bancoDados = await db;
-    int resultado = await bancoDados.insert(nomeTabela, anotacao.toMap() );
+    int resultado = await bancoDados.insert(nomeTabela, anotacao.toMap());
     return resultado;
+  }
+
+  recuperarAnotacoes() async {
+    var bancoDados = await db;
+    String sql = "SELECT * FROM $nomeTabela ORDER BY data DESC ";
+    List anotacoes = await bancoDados.rawQuery(sql);
+    return anotacoes;
+  }
+
+  Future<int> atualizarAnotacao(Anotacao anotacao) async {
+    var bancoDados = await db;
+    return await bancoDados.update(nomeTabela, anotacao.toMap(),
+        where: "id = ?", whereArgs: [anotacao.id]);
   }
 }
